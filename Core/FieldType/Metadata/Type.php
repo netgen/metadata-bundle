@@ -7,6 +7,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\SPI\FieldType\Value as SPIValue;
+use eZ\Publish\SPI\Persistence\Content\FieldValue;
 
 use DOMDocument;
 
@@ -59,12 +60,18 @@ class Type extends FieldType
      */
     public function fromHash( $hash )
     {
-        if ($hash === null)
+        if( $hash === null || empty( $hash['xml'] ) )
         {
-            return $this->getEmptyValue();
+            $xml = $this->getEmptyValue();
         }
+        else
+        {
+            $xml = $hash['xml'];
+        }
+        $domDocument = new DOMDocument('1.0', 'utf8');
+        $domDocument->loadXML($xml);
 
-        return new Value( $hash );
+        return new Value( $domDocument );
 
     }
 
@@ -82,7 +89,7 @@ class Type extends FieldType
      */
     public function toHash( SPIValue $value )
     {
-        return array( 'xml' => (string)$value->xml );
+        return array( 'xml' => $value->xml->saveXML() );
     }
 
     /**
@@ -254,44 +261,31 @@ class Type extends FieldType
     *
     * @return mixed
     */
-    protected function getSortInfo( CoreValue $value )
+    protected function getSortInfo( BaseValue $value )
     {
         return $this->getName( $value );
     }
 
     /**
-     * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Tweet\Value $value
+     * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
      * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
      */
     public function toPersistenceValue( SPIValue $value )
     {
-        if ( $value === null )
-        {
-            return new PersistenceValue(
-                array(
-                    "data" => null,
-                    "externalData" => null,
-                    "sortKey" => null,
-                )
-            );
-        }
         return new PersistenceValue(
             array(
-                "data" => $this->toHash( $value ),
+                "data" => $value->xml,
+                "externalData" => null,
                 "sortKey" => $this->getSortInfo( $value ),
             )
         );
     }
     /**
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
-     * @return \Netgen\Bundle\MetadataBundle\Core\FieldType\Tweet\Value
+     * @return \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value
      */
-    public function fromPersistenceValue( PersistenceValue $fieldValue )
+    public function fromPersistenceValue( FieldValue $fieldValue )
     {
-        if ( $fieldValue->data === null )
-        {
-            return $this->getEmptyValue();
-        }
         return new Value( $fieldValue->data );
     }
 }
