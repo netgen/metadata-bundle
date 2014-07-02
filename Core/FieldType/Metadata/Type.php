@@ -45,6 +45,22 @@ class Type extends FieldType
     }
 
     /**
+     * Returns if the given $value is considered empty by the field type
+     *
+     * Default implementation, which performs a "==" check with the value
+     * returned by {@link getEmptyValue()}. Overwrite in the specific field
+     * type, if necessary.
+     *
+     * @param \eZ\Publish\Core\FieldType\Value $value
+     *
+     * @return boolean
+     */
+    public function isEmptyValue( SPIValue $value )
+    {
+        return $value === null || $value->xml->saveXML() == $this->getEmptyValue()->xml->saveXML();
+    }
+
+    /**
      * Converts an $hash to the Value defined by the field type
      *
      * This is the reverse operation to {@link toHash()}. At least the hash
@@ -121,9 +137,10 @@ class Type extends FieldType
     {
         if ( is_array( $inputValue ) && !empty( $inputValue ) )
         {
-            $title = $inputValue['title'];
-            $keywords = $inputValue['keywords'];
-            $description = $inputValue['description'];
+            $title = !empty( $inputValue['title'] ) ? $inputValue['title'] : '';
+            $keywords = !empty( $inputValue['keywords'] )? $inputValue['keywords'] : array();
+            $description = !empty( $inputValue['description'] ) ? $inputValue['description'] : '';
+
             if ( empty( $inputValue['priority'] ) )
             {
                 $priority = null;
@@ -140,6 +157,7 @@ class Type extends FieldType
             {
                 $change = $inputValue['change'];
             }
+
             if ( $inputValue['sitemap_use'] === false )
             {
                 $sitemap_use = '1';
@@ -272,7 +290,7 @@ class Type extends FieldType
      */
     public function toPersistenceValue( SPIValue $value )
     {
-        return new PersistenceValue(
+        return new FieldValue(
             array(
                 "data" => $value->xml,
                 "externalData" => null,
