@@ -34,7 +34,7 @@ class MetadataConverter implements Converter
      */
     public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
     {
-        $storageFieldValue->dataText = $value->xml->saveXML();
+        $storageFieldValue->dataText = $value->data->saveXML();
     }
 
     /**
@@ -47,7 +47,7 @@ class MetadataConverter implements Converter
     {
         $domDoc = new DOMDocument;
         $domDoc->loadXML( $value->dataText ?: Value::EMPTY_VALUE );
-        $fieldValue->xml = $domDoc;
+        $fieldValue->data = $domDoc;
     }
 
     /**
