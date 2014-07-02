@@ -1,0 +1,9 @@
+parameters:
+    ezpublish.fieldType.metadata.class: Netgen\MetadataBundle\Core\FieldType\Metadata\Type
+
+services:
+    ezpublish.fieldType.metadata:
+        class: %ezpublish.fieldType.metadata.class%
+        parent: ezpublish.fieldType
+        tags:
+            - {name: ezpublish.fieldType, alias: xrowmetadata}
