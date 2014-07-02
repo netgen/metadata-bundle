@@ -1,6 +1,6 @@
 <?php
 
-namespace Netgen\MetadataBundle\Core\FieldType\Metadata;
+namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 

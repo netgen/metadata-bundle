@@ -1,5 +1,5 @@
 parameters:
-    ezpublish.fieldType.metadata.converter.class: Netgen\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
+    ezpublish.fieldType.metadata.converter.class: Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
 
 services:
     ezpublish.fieldType.metadata.converter:

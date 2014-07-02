@@ -1,5 +1,5 @@
 parameters:
-    ezpublish.fieldType.metadata.class: Netgen\MetadataBundle\Core\FieldType\Metadata\Type
+    ezpublish.fieldType.metadata.class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
 
 services:
     ezpublish.fieldType.metadata:

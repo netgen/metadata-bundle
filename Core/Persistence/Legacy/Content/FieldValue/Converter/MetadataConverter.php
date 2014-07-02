@@ -1,6 +1,6 @@
 <?php
 
-namespace Netgen\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter;
+namespace Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
@@ -8,7 +8,7 @@ use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 
-use Netgen\MetadataBundle\Core\FieldType\Metadata\Value;
+use Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value;
 
 use DOMDocument;
 
@@ -19,7 +19,7 @@ class MetadataConverter implements Converter
      *
      * @note Class should instead be configured as service if it gains dependencies.
      *
-     * @return \Netgen\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
+     * @return \Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
      */
     public static function create()
     {

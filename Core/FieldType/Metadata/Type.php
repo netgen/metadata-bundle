@@ -1,6 +1,6 @@
 <?php
 
-namespace Netgen\MetadataBundle\Core\FieldType\Metadata;
+namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 
@@ -76,7 +76,7 @@ class Type extends FieldType
      * support complex structures like objects. See the class level doc block
      * for additional information. See the class description for more details on a hash format.
      *
-     * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\MetadataBundle\Core\FieldType\Metadata\Value $value
+     * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
      *
      * @return mixed
      */
@@ -185,7 +185,7 @@ class Type extends FieldType
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure.
      *
-     * @param \Netgen\MetadataBundle\Core\FieldType\Metadata\Value $value
+     * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
      *
      * @return void
      */
@@ -211,7 +211,7 @@ class Type extends FieldType
      * The used $value can be assumed to be already accepted by {@link
      * acceptValue()}.
      *
-     * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\MetadataBundle\Core\FieldType\Metadata\Value $value
+     * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
      *
      * @return string
      */
@@ -250,7 +250,7 @@ class Type extends FieldType
     * For the legacy storage it is up to the field converters to set this
     * value in either sort_key_string or sort_key_int.
     *
-    * @param \eZ\Publish\Core\FieldType\Value|\Netgen\MetadataBundle\Core\FieldType\Metadata\Value $value
+    * @param \eZ\Publish\Core\FieldType\Value|\Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
     *
     * @return mixed
     */
@@ -260,7 +260,7 @@ class Type extends FieldType
     }
 
     /**
-     * @param \Netgen\MetadataBundle\Core\FieldType\Tweet\Value $value
+     * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Tweet\Value $value
      * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
      */
     public function toPersistenceValue( SPIValue $value )
@@ -284,7 +284,7 @@ class Type extends FieldType
     }
     /**
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
-     * @return \Netgen\MetadataBundle\Core\FieldType\Tweet\Value
+     * @return \Netgen\Bundle\MetadataBundle\Core\FieldType\Tweet\Value
      */
     public function fromPersistenceValue( PersistenceValue $fieldValue )
     {

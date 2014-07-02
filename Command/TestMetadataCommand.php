@@ -1,6 +1,6 @@
 <?php
 
-namespace Netgen\MetadataBundle\Command;
+namespace Netgen\Bundle\MetadataBundle\Command;
 
 use eZ\Publish\Core\Base\Exceptions\ContentFieldValidationException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

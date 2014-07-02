@@ -1,6 +1,6 @@
 <?php
 
-namespace Netgen\MetadataBundle;
+namespace Netgen\Bundle\MetadataBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
