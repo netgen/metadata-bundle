@@ -5,4 +5,4 @@ services:
     ezpublish.fieldType.metadata.converter:
         class: %ezpublish.fieldType.metadata.converter.class%
         tags:
-            - {name: ezpublish.storageEngine.legacy.converter, alias: xrowmetadata}
+            - {name: ezpublish.storageEngine.legacy.converter, alias: xrowmetadata, lazy: true, callback: "::create"}
