@@ -20,6 +20,18 @@ EOT;
      */
     public $xml;
 
+    public $priority;
+
+    public $change;
+
+    public $title;
+
+    public $keywords = array();
+
+    public $description;
+
+    public $sitemap_use;
+
     /**
      * Initializes a new Metadata Value object with $xmlDoc in
      *
@@ -34,6 +46,35 @@ EOT;
         }
 
         $this->xml = $xmlDoc;
+
+        $xmlStruct = simplexml_load_string($xmlDoc->saveXML());
+        $json = json_encode($xmlStruct);
+        $array = json_decode($json, true);
+
+        if( !empty($array['title'] ) )
+        {
+            $this->title = $array['title'];
+        }
+        if( !empty($array['keywords'] ) )
+        {
+            $this->keywords = array(explode(',', $array['keywords'] ) );
+        }
+        if( !empty($array['description'] ) )
+        {
+            $this->description = $array['description'];
+        }
+        if( !empty($array['priority'] ) )
+        {
+            $this->priority = $array['priority'];
+        }
+        if( !empty($array['change'] ) )
+        {
+            $this->change = $array['change'];
+        }
+        if( !empty($array['sitemap_use'] ) )
+        {
+            $this->sitemap_use = $array['sitemap_use'];
+        }
     }
 
     /**
