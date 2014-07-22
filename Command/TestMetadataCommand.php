@@ -34,12 +34,13 @@ class TestMetadataCommand extends ContainerAwareCommand
         $contentTypeService = $repository->getContentTypeService();
         $fieldTypeService = $repository->getFieldTypeService();
 
-        $contentId = 2;
+        $contentId = 38684;
+
+        // fetch content and display xrowmetadata field value
 
         try
         {
             $content = $contentService->loadContent( $contentId );
-
 
             $contentType = $contentTypeService->loadContentType( $content->contentInfo->contentTypeId );
             // iterate over the field definitions of the content type and print out each field's identifier and value
@@ -47,13 +48,16 @@ class TestMetadataCommand extends ContainerAwareCommand
 
             foreach( $contentType->fieldDefinitions as $fieldDefinition )
             {
-                $output->write( $fieldDefinition->identifier . ": " );
-                $fieldType = $fieldTypeService->getFieldType( $fieldDefinition->fieldTypeIdentifier );
-                $field = $content->getFieldValue( $fieldDefinition->identifier );
+                if($fieldDefinition->fieldTypeIdentifier == 'xrowmetadata')
+                {
+                    $output->write( $fieldDefinition->fieldTypeIdentifier . ": " );
+                    $fieldType = $fieldTypeService->getFieldType( $fieldDefinition->fieldTypeIdentifier );
+                    $field = $content->getFieldValue( $fieldDefinition->identifier );
 
-                // We use the Field's toHash() method to get readable content out of the Field
-                $valueHash = $fieldType->toHash( $field );
-                $output->writeln( $field );
+                    // We use the Field's toHash() method to get readable content out of the Field
+                    $valueHash = $fieldType->toHash( $field );
+                    $output->writeln( $valueHash['xml'] );
+                }
             }
         }
         catch( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
@@ -65,6 +69,49 @@ class TestMetadataCommand extends ContainerAwareCommand
         {
             // not allowed to read this content
             $output->writeln( "Anonymous users are not allowed to read content with id $contentId" );
+        }
+
+        // update current data
+        $userService = $repository->getUserService();
+        $user = $userService->loadUser(14);
+
+        $repository->setCurrentUser( $user );
+
+        try
+        {
+        $contentInfo = $contentService->loadContentInfo( $contentId );
+        $contentDraft = $contentService->createContentDraft( $contentInfo );
+
+        $contentUpdateStruct = $contentService->newContentUpdateStruct();
+
+        $metadata = array(
+            'title' => 'Test title',
+            'keywords' => array( 'keyword1', 'keyword2' ),
+            'sitemap_use' => true,
+            'priority' => 0.3,
+            'change' => 'monthly'
+        );
+
+        $contentUpdateStruct->setField( 'metadata', $metadata, 'ger-DE' );
+
+        $contentDraft = $contentService->updateContent( $contentDraft->versionInfo, $contentUpdateStruct );
+        $content = $contentService->publishVersion( $contentDraft->versionInfo );
+
+        }
+        catch( \eZ\Publish\API\Repository\Exceptions\NotFoundException $e )
+        {
+            // react on content not found
+            $output->writeln( $e->getMessage() );
+        }
+        catch( \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException $e )
+        {
+            // react on a field is not valid
+            $output->writeln( $e->getMessage() );
+        }
+        catch( \eZ\Publish\API\Repository\Exceptions\ContentValidationException $e )
+        {
+            // react on a required field is missing or empty
+            $output->writeln( $e->getMessage() );
         }
     }
 }
