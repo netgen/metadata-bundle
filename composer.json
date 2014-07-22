@@ -2,8 +2,8 @@
     "name": "netgen/metadata-bundle",
     "description": "Netgen Metadata for eZ",
     "minimum-stability": "dev",
-    "target-dir": "Netgen/MetadataBundle",
+    "target-dir": "Netgen/Bundle/MetadataBundle",
     "autoload": {
-        "psr-0": { "Netgen\\MetadataBundle": "" }
+        "psr-0": { "Netgen\\Bundle\\MetadataBundle": "" }
     }
 }
