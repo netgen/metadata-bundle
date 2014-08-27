@@ -5,8 +5,9 @@ namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 
 use DOMDocument;
+use ArrayAccess;
 
-class Value extends BaseValue
+class Value extends BaseValue implements ArrayAccess
 {
     const EMPTY_VALUE = <<<EOT
 <?xml version="1.0" encoding="utf-8"?>
@@ -83,5 +84,54 @@ EOT;
     public function __toString()
     {
         return isset( $this->xml ) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
+    }
+
+    /**
+     * Whether a offset exists
+     *
+     * @param mixed $offset An offset to check for
+     *
+     * @return boolean true on success or false on failure.
+     *                 The return value will be casted to boolean if non-boolean was returned.
+     */
+    public function offsetExists( $offset )
+    {
+        return isset( $this->{$offset} );
+    }
+
+    /**
+     * Offset to retrieve
+     *
+     * @param mixed $offset The offset to retrieve
+     *
+     * @return mixed
+     */
+    public function offsetGet( $offset )
+    {
+        if ( is_array( $this->{$offset} ) )
+        {
+            return implode( ',', $this->{$offset} );
+        }
+
+        return $this->{$offset};
+    }
+
+    /**
+     * Offset to set
+     *
+     * @param mixed $offset The offset to set
+     * @param mixed $value The value to set
+     */
+    public function offsetSet( $offset, $value )
+    {
+    }
+
+    /**
+     * Offset to unset
+     *
+     * @param mixed $offset The offset to unset
+     */
+    public function offsetUnset( $offset )
+    {
     }
 }
