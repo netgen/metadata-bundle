@@ -57,7 +57,7 @@ EOT;
         }
         if( !empty($array['keywords'] ) )
         {
-            $this->keywords = array(explode(',', $array['keywords'] ) );
+            $this->keywords = explode(',', $array['keywords'] );
         }
         if( !empty($array['description'] ) )
         {
