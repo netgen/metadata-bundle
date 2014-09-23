@@ -1,9 +1,18 @@
 {
     "name": "netgen/metadata-bundle",
-    "description": "Netgen Metadata for eZ",
-    "minimum-stability": "dev",
-    "target-dir": "Netgen/Bundle/MetadataBundle",
+    "description": "Netgen Metadata bundle for eZ Publish",
+    "authors": [
+        {
+            "name": "Netgen",
+            "homepage": "http://www.netgenlabs.com"
+        }
+    ],
+    "require": {
+        "ezsystems/ezpublish-kernel": "*",
+        "netgen/xrowmetadata": "*"
+    },
     "autoload": {
         "psr-0": { "Netgen\\Bundle\\MetadataBundle": "" }
-    }
+    },
+    "target-dir": "Netgen/Bundle/MetadataBundle"
 }
