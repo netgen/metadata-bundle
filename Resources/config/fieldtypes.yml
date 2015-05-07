@@ -1,6 +1,6 @@
 parameters:
     ezpublish.fieldType.metadata.class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
-    ezpublish.fieldType.indexable.xrowmetadata.class: %ezpublish.fieldType.indexable.unindexed.class%
+    ezpublish.fieldType.indexable.xrowmetadata.class: eZ\Publish\Core\FieldType\Unindexed
 
 services:
     ezpublish.fieldType.metadata:
