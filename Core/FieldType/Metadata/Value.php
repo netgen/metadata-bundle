@@ -36,19 +36,21 @@ EOT;
     /**
      * Initializes a new Metadata Value object with $xmlDoc in
      *
-     * @param \DOMDocument $xmlDoc
+     * @param \DOMDocument|string $xmlDoc
      */
-    public function __construct( DOMDocument $xmlDoc = null )
+    public function __construct( $xmlDoc = null )
     {
-        if ( $xmlDoc === null )
+        if ( $xmlDoc instanceof DOMDocument )
         {
-            $xmlDoc = new DOMDocument;
-            $xmlDoc->loadXML( self::EMPTY_VALUE );
+            $this->xml = $xmlDoc;
+        }
+        else
+        {
+            $this->xml = new DOMDocument();
+            $this->xml->loadXML( $xmlDoc === null ? self::EMPTY_VALUE : $xmlDoc );
         }
 
-        $this->xml = $xmlDoc;
-
-        $xmlStruct = simplexml_load_string($xmlDoc->saveXML());
+        $xmlStruct = simplexml_load_string($this->xml->saveXML());
         $json = json_encode($xmlStruct);
         $array = json_decode($json, true);
 

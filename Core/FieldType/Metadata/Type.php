@@ -76,19 +76,12 @@ class Type extends FieldType
      */
     public function fromHash( $hash )
     {
-        if( $hash === null || empty( $hash['xml'] ) )
+        if ( empty( $hash ) || empty( $hash['xml'] ) )
         {
-            $xml = $this->getEmptyValue();
+            return $this->getEmptyValue();
         }
-        else
-        {
-            $xml = $hash['xml'];
-        }
-        $domDocument = new DOMDocument('1.0', 'utf8');
-        $domDocument->loadXML($xml);
 
-        return new Value( $domDocument );
-
+        return new Value( $hash['xml'] );
     }
 
     /**
@@ -199,7 +192,7 @@ class Type extends FieldType
 
         if ( $inputValue === null )
         {
-            return new Value();
+            return $this->getEmptyValue();
         }
 
         return $inputValue;
@@ -292,7 +285,7 @@ class Type extends FieldType
     {
         return new FieldValue(
             array(
-                "data" => $value->xml,
+                "data" => $value->xml->saveXML(),
                 "externalData" => null,
                 "sortKey" => $this->getSortInfo( $value ),
             )

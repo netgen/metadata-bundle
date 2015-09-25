@@ -10,8 +10,6 @@ use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 
 use Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value;
 
-use DOMDocument;
-
 class MetadataConverter implements Converter
 {
     /**
@@ -34,7 +32,7 @@ class MetadataConverter implements Converter
      */
     public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
     {
-        $storageFieldValue->dataText = $value->data->saveXML();
+        $storageFieldValue->dataText = $value->data;
     }
 
     /**
@@ -45,9 +43,7 @@ class MetadataConverter implements Converter
      */
     public function toFieldValue( StorageFieldValue $value, FieldValue $fieldValue )
     {
-        $domDoc = new DOMDocument;
-        $domDoc->loadXML( $value->dataText ?: Value::EMPTY_VALUE );
-        $fieldValue->data = $domDoc;
+        $fieldValue->data = $value->dataText ?: Value::EMPTY_VALUE;
     }
 
     /**
