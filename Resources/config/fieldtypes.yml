@@ -1,10 +1,10 @@
 parameters:
-    ezpublish.fieldType.metadata.class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
+    ezpublish.fieldType.xrowmetadata.class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
     ezpublish.fieldType.indexable.xrowmetadata.class: eZ\Publish\Core\FieldType\Unindexed
 
 services:
-    ezpublish.fieldType.metadata:
-        class: %ezpublish.fieldType.metadata.class%
+    ezpublish.fieldType.xrowmetadata:
+        class: %ezpublish.fieldType.xrowmetadata.class%
         parent: ezpublish.fieldType
         tags:
             - {name: ezpublish.fieldType, alias: xrowmetadata}

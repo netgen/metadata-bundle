@@ -1,2 +1,2 @@
-NetgenMetadataBundle
-=========
+Netgen Metadata Bundle
+======================

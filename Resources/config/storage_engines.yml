@@ -1,8 +1,8 @@
 parameters:
-    ezpublish.fieldType.metadata.converter.class: Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
+    ezpublish.fieldType.xrowmetadata.converter.class: Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
 
 services:
-    ezpublish.fieldType.metadata.converter:
-        class: %ezpublish.fieldType.metadata.converter.class%
+    ezpublish.fieldType.xrowmetadata.converter:
+        class: %ezpublish.fieldType.xrowmetadata.converter.class%
         tags:
             - {name: ezpublish.storageEngine.legacy.converter, alias: xrowmetadata, lazy: true, callback: "::create"}

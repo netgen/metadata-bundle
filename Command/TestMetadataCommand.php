@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\MetadataBundle\Command;
 
-use eZ\Publish\Core\Base\Exceptions\ContentFieldValidationException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
