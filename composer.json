@@ -12,7 +12,6 @@
         "netgen/xrowmetadata": "*"
     },
     "autoload": {
-        "psr-0": { "Netgen\\Bundle\\MetadataBundle": "" }
-    },
-    "target-dir": "Netgen/Bundle/MetadataBundle"
+        "psr-4": { "Netgen\\Bundle\\MetadataBundle\\": "" }
+    }
 }
