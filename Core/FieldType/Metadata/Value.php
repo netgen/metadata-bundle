@@ -3,7 +3,6 @@
 namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
 use eZ\Publish\Core\FieldType\Value as BaseValue;
-
 use DOMDocument;
 use ArrayAccess;
 
@@ -15,7 +14,7 @@ class Value extends BaseValue implements ArrayAccess
 EOT;
 
     /**
-     * XML content as DOMDocument
+     * XML content as DOMDocument.
      *
      * @var \DOMDocument
      */
@@ -34,48 +33,39 @@ EOT;
     public $sitemap_use;
 
     /**
-     * Initializes a new Metadata Value object with $xmlDoc in
+     * Initializes a new Metadata Value object with $xmlDoc in.
      *
      * @param \DOMDocument|string $xmlDoc
      */
-    public function __construct( $xmlDoc = null )
+    public function __construct($xmlDoc = null)
     {
-        if ( $xmlDoc instanceof DOMDocument )
-        {
+        if ($xmlDoc instanceof DOMDocument) {
             $this->xml = $xmlDoc;
-        }
-        else
-        {
+        } else {
             $this->xml = new DOMDocument();
-            $this->xml->loadXML( $xmlDoc === null ? self::EMPTY_VALUE : $xmlDoc );
+            $this->xml->loadXML($xmlDoc === null ? self::EMPTY_VALUE : $xmlDoc);
         }
 
         $xmlStruct = simplexml_load_string($this->xml->saveXML());
         $json = json_encode($xmlStruct);
         $array = json_decode($json, true);
 
-        if( !empty($array['title'] ) )
-        {
+        if (!empty($array['title'])) {
             $this->title = $array['title'];
         }
-        if( !empty($array['keywords'] ) )
-        {
-            $this->keywords = explode(',', $array['keywords'] );
+        if (!empty($array['keywords'])) {
+            $this->keywords = explode(',', $array['keywords']);
         }
-        if( !empty($array['description'] ) )
-        {
+        if (!empty($array['description'])) {
             $this->description = $array['description'];
         }
-        if( !empty($array['priority'] ) )
-        {
+        if (!empty($array['priority'])) {
             $this->priority = $array['priority'];
         }
-        if( !empty($array['change'] ) )
-        {
+        if (!empty($array['change'])) {
             $this->change = $array['change'];
         }
-        if( !empty($array['sitemap_use'] ) )
-        {
+        if (!empty($array['sitemap_use'])) {
             $this->sitemap_use = $array['sitemap_use'];
         }
     }
@@ -85,55 +75,54 @@ EOT;
      */
     public function __toString()
     {
-        return isset( $this->xml ) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
+        return isset($this->xml) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
     }
 
     /**
-     * Whether a offset exists
+     * Whether a offset exists.
      *
      * @param mixed $offset An offset to check for
      *
-     * @return boolean true on success or false on failure.
+     * @return bool true on success or false on failure.
      *                 The return value will be casted to boolean if non-boolean was returned.
      */
-    public function offsetExists( $offset )
+    public function offsetExists($offset)
     {
-        return isset( $this->{$offset} );
+        return isset($this->{$offset});
     }
 
     /**
-     * Offset to retrieve
+     * Offset to retrieve.
      *
      * @param mixed $offset The offset to retrieve
      *
      * @return mixed
      */
-    public function offsetGet( $offset )
+    public function offsetGet($offset)
     {
-        if ( is_array( $this->{$offset} ) )
-        {
-            return implode( ',', $this->{$offset} );
+        if (is_array($this->{$offset})) {
+            return implode(',', $this->{$offset});
         }
 
         return $this->{$offset};
     }
 
     /**
-     * Offset to set
+     * Offset to set.
      *
      * @param mixed $offset The offset to set
      * @param mixed $value The value to set
      */
-    public function offsetSet( $offset, $value )
+    public function offsetSet($offset, $value)
     {
     }
 
     /**
-     * Offset to unset
+     * Offset to unset.
      *
      * @param mixed $offset The offset to unset
      */
-    public function offsetUnset( $offset )
+    public function offsetUnset($offset)
     {
     }
 }
