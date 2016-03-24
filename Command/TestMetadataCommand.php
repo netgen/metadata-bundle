@@ -6,14 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class TestMetadataCommand extends ContainerAwareCommand
+class TestMetadataCommand // extends ContainerAwareCommand
 {
     /**
      * This method override configures on input argument for the content id.
      */
     protected function configure()
     {
-        $this->setName('ezpublish:test:metadata');
+        $this->setName('netgen:metadata:test');
     }
 
     /**
