@@ -4,12 +4,12 @@ parameters:
 
 services:
     ezpublish.fieldType.xrowmetadata:
-        class: %ezpublish.fieldType.xrowmetadata.class%
+        class: "%ezpublish.fieldType.xrowmetadata.class%"
         parent: ezpublish.fieldType
         tags:
             - {name: ezpublish.fieldType, alias: xrowmetadata}
 
     ezpublish.fieldType.indexable.xrowmetadata:
-        class: %ezpublish.fieldType.indexable.xrowmetadata.class%
+        class: "%ezpublish.fieldType.indexable.xrowmetadata.class%"
         tags:
             - {name: ezpublish.fieldType.indexable, alias: xrowmetadata}
