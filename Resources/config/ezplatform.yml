@@ -1,4 +1,4 @@
 system:
     default:
         fielddefinition_settings_templates:
-            - {template: "NetgenMetadataBundle:platformui/content_type/view:xrowmetadata.html.twig", priority: 10}
+            - {template: "NetgenMetadataBundle:platformui/content_type/view:xrowmetadata.html.twig", priority: 0}
