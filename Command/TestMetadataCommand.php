@@ -43,7 +43,6 @@ class TestMetadataCommand // extends ContainerAwareCommand
             $contentType = $contentTypeService->loadContentType($content->contentInfo->contentTypeId);
             // iterate over the field definitions of the content type and print out each field's identifier and value
 
-
             foreach ($contentType->fieldDefinitions as $fieldDefinition) {
                 if ($fieldDefinition->fieldTypeIdentifier == 'xrowmetadata') {
                     $output->write($fieldDefinition->fieldTypeIdentifier . ': ');

@@ -8,7 +8,7 @@ use ArrayAccess;
 
 class Value extends BaseValue implements ArrayAccess
 {
-    const EMPTY_VALUE = <<<EOT
+    const EMPTY_VALUE = <<<'EOT'
 <?xml version="1.0" encoding="utf-8"?>
 <MetaData/>
 EOT;

@@ -121,7 +121,7 @@ class Type extends FieldType
      *
      * @param mixed $inputValue
      *
-     * @return mixed The potentially converted input value.
+     * @return mixed the potentially converted input value
      */
     protected function createValueFromInput($inputValue)
     {
@@ -182,7 +182,7 @@ class Type extends FieldType
     /**
      * Throws an exception if value structure is not of expected format.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure.
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      *
      * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
      */
@@ -264,6 +264,7 @@ class Type extends FieldType
             )
         );
     }
+
     /**
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
      * @return \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value
