@@ -1,0 +1,8 @@
+{% block xrowmetadata_field %}
+    <p><strong>Title:</strong> {{ field.value.title|default('') }}</p>
+    <p><strong>Description:</strong> {{ field.value.description|default('') }}</p>
+    <p><strong>Keywords:</strong> {{ field.value.keywords|join(', ') }}</p>
+    <p><strong>Use in sitemap:</strong> {{ field.value.sitemap_use ? 'Yes' : 'No' }}</p>
+    <p><strong>Change frequency:</strong> {{ field.value.change }}</p>
+    <p><strong>Priority:</strong> {{ field.value.priority|default(0) }}</p>
+{% endblock %}

@@ -1,4 +1,6 @@
 system:
     default:
+        field_templates:
+            - {template: "@NetgenMetadata/field/view/xrowmetadata.html.twig", priority: 0}
         fielddefinition_settings_templates:
-            - {template: "NetgenMetadataBundle:platformui/content_type/view:xrowmetadata.html.twig", priority: 0}
+            - {template: "@NetgenMetadata/field_definition/view/xrowmetadata.html.twig", priority: 0}
