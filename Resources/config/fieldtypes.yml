@@ -1,15 +1,13 @@
-parameters:
-    ezpublish.fieldType.xrowmetadata.class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
-    ezpublish.fieldType.indexable.xrowmetadata.class: eZ\Publish\Core\FieldType\Unindexed
-
 services:
-    ezpublish.fieldType.xrowmetadata:
-        class: "%ezpublish.fieldType.xrowmetadata.class%"
+    netgen_metadata.field_type:
+        class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
+        public: true
         parent: ezpublish.fieldType
         tags:
-            - {name: ezpublish.fieldType, alias: xrowmetadata}
+            - { name: ezpublish.fieldType, alias: xrowmetadata }
 
-    ezpublish.fieldType.indexable.xrowmetadata:
-        class: "%ezpublish.fieldType.indexable.xrowmetadata.class%"
+    netgen_metadata.field_type.indexable:
+        class: eZ\Publish\Core\FieldType\Unindexed
+        public: false
         tags:
-            - {name: ezpublish.fieldType.indexable, alias: xrowmetadata}
+            - { name: ezpublish.fieldType.indexable, alias: xrowmetadata }
