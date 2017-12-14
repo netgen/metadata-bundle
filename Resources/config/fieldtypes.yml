@@ -11,3 +11,17 @@ services:
         public: false
         tags:
             - { name: ezpublish.fieldType.indexable, alias: xrowmetadata }
+
+    netgen_metadata.field_type.form_mapper:
+        class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\FormMapper
+        public: false
+        tags:
+            - { name: ez.fieldFormMapper.value, fieldType: xrowmetadata }
+
+    netgen_metadata.form.metadata_field:
+        class: Netgen\Bundle\MetadataBundle\Form\Type\FieldType\MetadataFieldType
+        # public: false
+        arguments:
+            - "@netgen_metadata.field_type"
+        tags:
+            - { name: form.type }

@@ -1,0 +1,16 @@
+content.field_type.xrowmetadata.title: 'Title'
+content.field_type.xrowmetadata.description: 'Description'
+content.field_type.xrowmetadata.keywords: 'Keywords'
+content.field_type.xrowmetadata.priority: 'Priority'
+content.field_type.xrowmetadata.change: 'Change frequency'
+content.field_type.xrowmetadata.sitemap_use: 'Use in sitemap'
+
+content.field_type.xrowmetadata.priority.automatic: 'Automatic'
+
+content.field_type.xrowmetadata.change.always: 'Always'
+content.field_type.xrowmetadata.change.hourly: 'Hourly'
+content.field_type.xrowmetadata.change.daily: 'Daily'
+content.field_type.xrowmetadata.change.weekly: 'Weekly'
+content.field_type.xrowmetadata.change.monthly: 'Monthly'
+content.field_type.xrowmetadata.change.yearly: 'Yearly'
+content.field_type.xrowmetadata.change.never: 'Never'
