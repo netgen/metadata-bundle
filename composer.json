@@ -17,7 +17,7 @@
         "netgen/xrowmetadata": "^3.0"
     },
     "autoload": {
-        "psr-4": { "Netgen\\Bundle\\MetadataBundle\\": "" }
+        "psr-4": { "Netgen\\Bundle\\MetadataBundle\\": "bundle/" }
     },
     "extra": {
         "branch-alias": {
