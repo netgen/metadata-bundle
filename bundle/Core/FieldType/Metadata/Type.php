@@ -207,6 +207,8 @@ class Type extends FieldType
      * The used $value can be assumed to be already accepted by {@link * acceptValue()}.
      *
      * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
+     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
+     * @param string $languageCode
      *
      * @return string
      */
