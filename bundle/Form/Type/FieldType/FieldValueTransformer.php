@@ -25,7 +25,7 @@ class FieldValueTransformer implements DataTransformerInterface
      *
      * @return array
      */
-    public function transform($value)
+    public function transform($value): array
     {
         if (!$value instanceof Value) {
             return null;
@@ -41,7 +41,7 @@ class FieldValueTransformer implements DataTransformerInterface
         ];
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform($value): Value
     {
         if ($value === null) {
             return $this->fieldType->getEmptyValue();

@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormInterface;
 
 class FormMapper implements FieldValueFormMapperInterface
 {
-    public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data)
+    public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data): void
     {
         $fieldForm
             ->add(

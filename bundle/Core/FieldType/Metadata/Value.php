@@ -45,7 +45,7 @@ EOT;
             $this->xml = $xmlDoc;
         } else {
             $this->xml = new DOMDocument();
-            $this->xml->loadXML($xmlDoc === null ? self::EMPTY_VALUE : $xmlDoc);
+            $this->xml->loadXML($xmlDoc ?? self::EMPTY_VALUE);
         }
 
         $xmlStruct = simplexml_load_string($this->xml->saveXML());
@@ -72,34 +72,16 @@ EOT;
         }
     }
 
-    /**
-     * @see \eZ\Publish\Core\FieldType\Value
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return isset($this->xml) ? (string) $this->xml->saveXML() : self::EMPTY_VALUE;
     }
 
-    /**
-     * Whether a offset exists.
-     *
-     * @param mixed $offset An offset to check for
-     *
-     * @return bool true on success or false on failure.
-     *                 The return value will be casted to boolean if non-boolean was returned.
-     */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->{$offset});
     }
 
-    /**
-     * Offset to retrieve.
-     *
-     * @param mixed $offset The offset to retrieve
-     *
-     * @return mixed
-     */
     public function offsetGet($offset)
     {
         if (is_array($this->{$offset})) {
@@ -109,22 +91,11 @@ EOT;
         return $this->{$offset};
     }
 
-    /**
-     * Offset to set.
-     *
-     * @param mixed $offset The offset to set
-     * @param mixed $value The value to set
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
     }
 
-    /**
-     * Offset to unset.
-     *
-     * @param mixed $offset The offset to unset
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
     }
 }

@@ -14,20 +14,14 @@ use Symfony\Component\Yaml\Yaml;
 
 class NetgenMetadataExtension extends Extension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('fieldtypes.yml');
         $loader->load('storage_engines.yml');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $configs = [
             'ezplatform.yml' => 'ezpublish',
