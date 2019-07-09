@@ -15,12 +15,6 @@
     "require": {
         "ezsystems/ezpublish-kernel": "^8.0"
     },
-    "suggest": {
-        "netgen/xrowmetadata": "Adds the possibility to edit the field type in eZ Publish Legacy administration interface"
-    },
-    "conflict": {
-        "netgen/xrowmetadata": "<3.0"
-    },
     "autoload": {
         "psr-4": { "Netgen\\Bundle\\MetadataBundle\\": "bundle/" }
     },
