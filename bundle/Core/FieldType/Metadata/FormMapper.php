@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
 use EzSystems\RepositoryForms\Data\Content\FieldData;
@@ -17,10 +19,10 @@ class FormMapper implements FieldValueFormMapperInterface
                     ->create(
                         'value',
                         MetadataFieldType::class,
-                        array(
+                        [
                             'required' => $data->fieldDefinition->isRequired,
                             'label' => $data->fieldDefinition->getName(),
-                        )
+                        ]
                     )
                     ->setAutoInitialize(false)
                     ->getForm()

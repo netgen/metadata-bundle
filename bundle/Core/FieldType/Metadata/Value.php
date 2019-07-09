@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
-use eZ\Publish\Core\FieldType\Value as BaseValue;
-use DOMDocument;
 use ArrayAccess;
+use DOMDocument;
+use eZ\Publish\Core\FieldType\Value as BaseValue;
 
 class Value extends BaseValue implements ArrayAccess
 {
-    const EMPTY_VALUE = <<<'EOT'
+    public const EMPTY_VALUE = <<<'EOT'
 <?xml version="1.0" encoding="utf-8"?>
 <MetaData/>
 EOT;
@@ -26,7 +28,7 @@ EOT;
 
     public $title;
 
-    public $keywords = array();
+    public $keywords = [];
 
     public $description;
 
@@ -75,7 +77,7 @@ EOT;
      */
     public function __toString()
     {
-        return isset($this->xml) ? (string)$this->xml->saveXML() : self::EMPTY_VALUE;
+        return isset($this->xml) ? (string) $this->xml->saveXML() : self::EMPTY_VALUE;
     }
 
     /**

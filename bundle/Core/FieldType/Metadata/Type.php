@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
+use DOMDocument;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\SPI\FieldType\Value as SPIValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
-use DOMDocument;
 
 class Type extends FieldType
 {
@@ -56,7 +58,7 @@ class Type extends FieldType
      */
     public function isEmptyValue(SPIValue $value)
     {
-        return $value === null || $value->xml->saveXML() == $this->getEmptyValue()->xml->saveXML();
+        return $value === null || $value->xml->saveXML() === $this->getEmptyValue()->xml->saveXML();
     }
 
     /**
@@ -96,7 +98,77 @@ class Type extends FieldType
      */
     public function toHash(SPIValue $value)
     {
-        return array('xml' => $value->xml->saveXML());
+        return ['xml' => $value->xml->saveXML()];
+    }
+
+    /**
+     * Returns a human readable string representation from the given $value.
+     *
+     * It will be used to generate content name and url alias if current field
+     * is designated to be used in the content name/urlAlias pattern.
+     *
+     * The used $value can be assumed to be already accepted by {@link * acceptValue()}.
+     *
+     * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
+     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
+     * @param string $languageCode
+     *
+     * @return string
+     */
+    public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
+    {
+        $result = null;
+        if ($metadata = $value->xml->documentElement->firstChild) {
+            $textDom = $metadata->firstChild;
+
+            if ($textDom && $textDom->hasChildNodes()) {
+                $result = $textDom->firstChild->textContent;
+            } elseif ($textDom) {
+                $result = $textDom->textContent;
+            }
+        }
+
+        if ($result === null) {
+            $result = $value->xml->documentElement->textContent;
+        }
+
+        return trim($result);
+    }
+
+    /**
+     * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
+     *
+     * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+     */
+    public function toPersistenceValue(SPIValue $value)
+    {
+        return new FieldValue(
+            [
+                'data' => $value->xml->saveXML(),
+                'externalData' => null,
+                'sortKey' => $this->getSortInfo($value),
+            ]
+        );
+    }
+
+    /**
+     * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
+     *
+     * @return \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value
+     */
+    public function fromPersistenceValue(FieldValue $fieldValue)
+    {
+        return new Value($fieldValue->data);
+    }
+
+    /**
+     * Returns whether the field type is searchable.
+     *
+     * @return bool
+     */
+    public function isSearchable()
+    {
+        return true;
     }
 
     /**
@@ -128,7 +200,7 @@ class Type extends FieldType
     {
         if (is_array($inputValue) && !empty($inputValue)) {
             $title = !empty($inputValue['title']) ? $inputValue['title'] : '';
-            $keywords = !empty($inputValue['keywords']) ? $inputValue['keywords'] : array();
+            $keywords = !empty($inputValue['keywords']) ? $inputValue['keywords'] : [];
             $description = !empty($inputValue['description']) ? $inputValue['description'] : '';
 
             if (empty($inputValue['priority'])) {
@@ -183,9 +255,10 @@ class Type extends FieldType
     /**
      * Throws an exception if value structure is not of expected format.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      *
      * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException if the value does not match the expected structure
      */
     protected function checkValueStructure(BaseValue $value)
     {
@@ -196,40 +269,6 @@ class Type extends FieldType
                 $value
             );
         }
-    }
-
-    /**
-     * Returns a human readable string representation from the given $value.
-     *
-     * It will be used to generate content name and url alias if current field
-     * is designated to be used in the content name/urlAlias pattern.
-     *
-     * The used $value can be assumed to be already accepted by {@link * acceptValue()}.
-     *
-     * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     * @param string $languageCode
-     *
-     * @return string
-     */
-    public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
-    {
-        $result = null;
-        if ($metadata = $value->xml->documentElement->firstChild) {
-            $textDom = $metadata->firstChild;
-
-            if ($textDom && $textDom->hasChildNodes()) {
-                $result = $textDom->firstChild->textContent;
-            } elseif ($textDom) {
-                $result = $textDom->textContent;
-            }
-        }
-
-        if ($result === null) {
-            $result = $value->xml->documentElement->textContent;
-        }
-
-        return trim($result);
     }
 
     /**
@@ -251,39 +290,5 @@ class Type extends FieldType
     protected function getSortInfo(BaseValue $value)
     {
         return $this->getName($value);
-    }
-
-    /**
-     * @param \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
-     * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
-     */
-    public function toPersistenceValue(SPIValue $value)
-    {
-        return new FieldValue(
-            array(
-                'data' => $value->xml->saveXML(),
-                'externalData' => null,
-                'sortKey' => $this->getSortInfo($value),
-            )
-        );
-    }
-
-    /**
-     * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
-     * @return \Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value
-     */
-    public function fromPersistenceValue(FieldValue $fieldValue)
-    {
-        return new Value($fieldValue->data);
-    }
-
-    /**
-     * Returns whether the field type is searchable.
-     *
-     * @return bool
-     */
-    public function isSearchable()
-    {
-        return true;
     }
 }

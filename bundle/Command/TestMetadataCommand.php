@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\MetadataBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -20,9 +22,10 @@ class TestMetadataCommand // extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface  $input  An InputInterface instance
      * @param \Symfony\Component\Console\Output\OutputInterface $output An OutputInterface instance
      *
-     * @return null|int null or 0 if everything went fine, or an error code
-     *
      * @throws \LogicException When this abstract method is not implemented
+     *
+     * @return int|null null or 0 if everything went fine, or an error code
+     *
      * @see    setCode()
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -44,7 +47,7 @@ class TestMetadataCommand // extends ContainerAwareCommand
             // iterate over the field definitions of the content type and print out each field's identifier and value
 
             foreach ($contentType->fieldDefinitions as $fieldDefinition) {
-                if ($fieldDefinition->fieldTypeIdentifier == 'xrowmetadata') {
+                if ($fieldDefinition->fieldTypeIdentifier === 'xrowmetadata') {
                     $output->write($fieldDefinition->fieldTypeIdentifier . ': ');
                     $fieldType = $fieldTypeService->getFieldType($fieldDefinition->fieldTypeIdentifier);
                     $field = $content->getFieldValue($fieldDefinition->identifier);
@@ -56,10 +59,10 @@ class TestMetadataCommand // extends ContainerAwareCommand
             }
         } catch (\eZ\Publish\API\Repository\Exceptions\NotFoundException $e) {
             // if the id is not found
-            $output->writeln("No content with id $contentId");
+            $output->writeln("No content with id {$contentId}");
         } catch (\eZ\Publish\API\Repository\Exceptions\UnauthorizedException $e) {
             // not allowed to read this content
-            $output->writeln("Anonymous users are not allowed to read content with id $contentId");
+            $output->writeln("Anonymous users are not allowed to read content with id {$contentId}");
         }
 
         // update current data
@@ -74,13 +77,13 @@ class TestMetadataCommand // extends ContainerAwareCommand
 
             $contentUpdateStruct = $contentService->newContentUpdateStruct();
 
-            $metadata = array(
-            'title' => 'Test title',
-            'keywords' => array('keyword1', 'keyword2'),
-            'sitemap_use' => true,
-            'priority' => 0.3,
-            'change' => 'monthly',
-        );
+            $metadata = [
+                'title' => 'Test title',
+                'keywords' => ['keyword1', 'keyword2'],
+                'sitemap_use' => true,
+                'priority' => 0.3,
+                'change' => 'monthly',
+            ];
 
             $contentUpdateStruct->setField('metadata', $metadata, 'ger-DE');
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\MetadataBundle\Form\Type\FieldType;
 
 use eZ\Publish\SPI\FieldType\FieldType;
@@ -29,14 +31,14 @@ class FieldValueTransformer implements DataTransformerInterface
             return null;
         }
 
-        return array(
+        return [
             'title' => $value->title,
             'description' => $value->description,
             'keywords' => implode(',', $value->keywords),
             'priority' => $value->priority,
             'change' => $value->change,
             'sitemap_use' => !empty($value->sitemap_use),
-        );
+        ];
     }
 
     public function reverseTransform($value)
