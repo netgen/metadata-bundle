@@ -12,18 +12,6 @@ use Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value;
 class MetadataConverter implements Converter
 {
     /**
-     * Factory for current class.
-     *
-     * @note Class should instead be configured as service if it gains dependencies.
-     *
-     * @return \Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
-     */
-    public static function create()
-    {
-        return new self();
-    }
-
-    /**
      * Converts data from $value to $storageFieldValue.
      *
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $value
