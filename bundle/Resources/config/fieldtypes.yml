@@ -8,19 +8,16 @@ services:
 
     netgen_metadata.field_type.indexable:
         class: eZ\Publish\Core\FieldType\Unindexed
-        public: false
         tags:
             - { name: ezplatform.field_type.indexable, alias: xrowmetadata }
 
     netgen_metadata.field_type.form_mapper:
         class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\FormMapper
-        public: false
         tags:
             - { name: ezplatform.field_type.form_mapper.value, fieldType: xrowmetadata }
 
     netgen_metadata.form.metadata_field:
         class: Netgen\Bundle\MetadataBundle\Form\Type\FieldType\MetadataFieldType
-        # public: false
         arguments:
             - "@netgen_metadata.field_type"
         tags:
