@@ -1,7 +1,6 @@
 services:
     netgen_metadata.field_type:
         class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
-        public: true
         parent: ezpublish.fieldType
         tags:
             - { name: ezplatform.field_type, alias: xrowmetadata }
