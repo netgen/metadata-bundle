@@ -9,7 +9,7 @@ use EzSystems\RepositoryForms\FieldType\FieldValueFormMapperInterface;
 use Netgen\Bundle\MetadataBundle\Form\Type\FieldType\MetadataFieldType;
 use Symfony\Component\Form\FormInterface;
 
-class FormMapper implements FieldValueFormMapperInterface
+final class FormMapper implements FieldValueFormMapperInterface
 {
     public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data): void
     {

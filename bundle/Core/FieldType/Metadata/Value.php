@@ -8,7 +8,7 @@ use ArrayAccess;
 use DOMDocument;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 
-class Value extends BaseValue implements ArrayAccess
+final class Value extends BaseValue implements ArrayAccess
 {
     public const EMPTY_VALUE = <<<'EOT'
 <?xml version="1.0" encoding="utf-8"?>

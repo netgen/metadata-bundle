@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class MetadataFieldType extends AbstractType
+final class MetadataFieldType extends AbstractType
 {
     /**
      * @var \eZ\Publish\SPI\FieldType\FieldType

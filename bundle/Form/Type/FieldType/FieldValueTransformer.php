@@ -8,7 +8,7 @@ use eZ\Publish\SPI\FieldType\FieldType;
 use eZ\Publish\SPI\FieldType\Value;
 use Symfony\Component\Form\DataTransformerInterface;
 
-class FieldValueTransformer implements DataTransformerInterface
+final class FieldValueTransformer implements DataTransformerInterface
 {
     /**
      * @var \eZ\Publish\SPI\FieldType\FieldType

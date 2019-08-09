@@ -11,7 +11,7 @@ use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 use Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value;
 
-class MetadataConverter implements Converter
+final class MetadataConverter implements Converter
 {
     public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void
     {

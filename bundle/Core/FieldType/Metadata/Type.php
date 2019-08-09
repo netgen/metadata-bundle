@@ -12,7 +12,7 @@ use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\SPI\FieldType\Value as SPIValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 
-class Type extends FieldType
+final class Type extends FieldType
 {
     public function getFieldTypeIdentifier(): string
     {
@@ -164,7 +164,7 @@ class Type extends FieldType
     /**
      * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Value $value
      */
-    protected function innerGetName(SPIValue $value): string
+    private function innerGetName(SPIValue $value): string
     {
         $result = null;
         if ($metadata = $value->xml->documentElement->firstChild) {
