@@ -15,6 +15,11 @@ services:
         tags:
             - { name: ezplatform.field_type.form_mapper.value, fieldType: xrowmetadata }
 
+    netgen_metadata.field_type.legacy.converter:
+        class: Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
+        tags:
+            - { name: ezplatform.field_type.legacy_storage.converter, alias: xrowmetadata }
+
     netgen_metadata.form.metadata_field:
         class: Netgen\Bundle\MetadataBundle\Form\Type\FieldType\MetadataFieldType
         arguments:

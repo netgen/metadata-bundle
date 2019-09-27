@@ -17,21 +17,14 @@ final class NetgenMetadataExtension extends Extension implements PrependExtensio
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('fieldtypes.yml');
-        $loader->load('storage_engines.yml');
+        $loader->load('services.yaml');
     }
 
     public function prepend(ContainerBuilder $container): void
     {
-        $configs = [
-            'ezplatform.yml' => 'ezpublish',
-        ];
-
-        foreach ($configs as $fileName => $extensionName) {
-            $configFile = __DIR__ . '/../Resources/config/' . $fileName;
-            $config = Yaml::parse(file_get_contents($configFile));
-            $container->prependExtensionConfig($extensionName, $config);
-            $container->addResource(new FileResource($configFile));
-        }
+        $configFile = __DIR__ . '/../Resources/config/ezplatform.yaml';
+        $config = Yaml::parse(file_get_contents($configFile));
+        $container->prependExtensionConfig('ezpublish', $config);
+        $container->addResource(new FileResource($configFile));
     }
 }
