@@ -66,7 +66,6 @@ final class MetadataFieldType extends AbstractType
                         '0.9' => '0.9',
                         '1.0' => '1.0',
                     ],
-                    'choices_as_values' => true,
                     'label' => 'content.field_type.xrowmetadata.priority',
                 ]
             )
@@ -83,7 +82,6 @@ final class MetadataFieldType extends AbstractType
                         'content.field_type.xrowmetadata.change.yearly' => 'yearly',
                         'content.field_type.xrowmetadata.change.never' => 'never',
                     ],
-                    'choices_as_values' => true,
                     'label' => 'content.field_type.xrowmetadata.change',
                 ]
             )
