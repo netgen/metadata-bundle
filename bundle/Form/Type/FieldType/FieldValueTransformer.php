@@ -47,7 +47,7 @@ final class FieldValueTransformer implements DataTransformerInterface
             return $this->fieldType->getEmptyValue();
         }
 
-        $value['keywords'] = explode(',', (string)$value['keywords']);
+        $value['keywords'] = explode(',', $value['keywords'] ?? '');
         $value['sitemap_use'] = $value['sitemap_use'] ? '1' : '0';
 
         return $this->fieldType->acceptValue($value);
