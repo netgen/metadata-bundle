@@ -25,7 +25,7 @@ final class FieldValueTransformer implements DataTransformerInterface
      *
      * @return array
      */
-    public function transform($value): array
+    public function transform($value): ?array
     {
         if (!$value instanceof Value) {
             return null;
