@@ -7,6 +7,8 @@ namespace Netgen\Bundle\MetadataBundle\Form\Type\FieldType;
 use eZ\Publish\SPI\FieldType\FieldType;
 use eZ\Publish\SPI\FieldType\Value;
 use Symfony\Component\Form\DataTransformerInterface;
+use function explode;
+use function implode;
 
 final class FieldValueTransformer implements DataTransformerInterface
 {

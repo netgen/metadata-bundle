@@ -7,6 +7,12 @@ namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 use ArrayAccess;
 use DOMDocument;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
+use function explode;
+use function implode;
+use function is_array;
+use function json_decode;
+use function json_encode;
+use function simplexml_load_string;
 
 final class Value extends BaseValue implements ArrayAccess
 {

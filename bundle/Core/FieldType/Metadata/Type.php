@@ -11,6 +11,11 @@ use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\SPI\FieldType\Value as SPIValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
+use function htmlspecialchars;
+use function implode;
+use function is_array;
+use function trim;
+use const ENT_QUOTES;
 
 final class Type extends FieldType
 {
