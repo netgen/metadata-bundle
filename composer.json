@@ -1,6 +1,6 @@
 {
     "name": "netgen/metadata-bundle",
-    "description": "Metadata bundle for eZ Platform. Based on xrowmetadata extension for eZ Publish Legacy.",
+    "description": "Metadata bundle for Ibexa OSS. Based on xrowmetadata extension for eZ Publish Legacy.",
     "license": "GPL-2.0-only",
     "authors": [
         {
@@ -13,14 +13,14 @@
         }
     ],
     "require": {
-        "ezsystems/ezplatform-kernel": "^1.0"
+        "ibexa/core": "^4.0"
     },
     "autoload": {
         "psr-4": { "Netgen\\Bundle\\MetadataBundle\\": "bundle/" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0.x-dev"
+            "dev-master": "4.0.x-dev"
         }
     }
 }
