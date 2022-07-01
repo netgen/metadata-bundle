@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformContentForms\FieldType\FieldValueFormMapperInterface;
+use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
+use Ibexa\Contracts\ContentForms\FieldType\FieldValueFormMapperInterface;
 use Netgen\Bundle\MetadataBundle\Form\Type\FieldType\MetadataFieldType;
 use Symfony\Component\Form\FormInterface;
 

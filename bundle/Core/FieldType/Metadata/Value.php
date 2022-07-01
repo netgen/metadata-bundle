@@ -6,7 +6,7 @@ namespace Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata;
 
 use ArrayAccess;
 use DOMDocument;
-use eZ\Publish\Core\FieldType\Value as BaseValue;
+use Ibexa\Core\FieldType\Value as BaseValue;
 use function explode;
 use function implode;
 use function is_array;

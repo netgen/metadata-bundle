@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\MetadataBundle\Form\Type\FieldType;
 
-use eZ\Publish\SPI\FieldType\FieldType;
-use eZ\Publish\SPI\FieldType\Value;
+use Ibexa\Contracts\Core\FieldType\FieldType;
+use Ibexa\Contracts\Core\FieldType\Value;
 use Symfony\Component\Form\DataTransformerInterface;
 use function explode;
 use function implode;
@@ -13,7 +13,7 @@ use function implode;
 final class FieldValueTransformer implements DataTransformerInterface
 {
     /**
-     * @var \eZ\Publish\SPI\FieldType\FieldType
+     * @var \Ibexa\Contracts\Core\FieldType\FieldType
      */
     private $fieldType;
 

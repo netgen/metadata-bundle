@@ -1,24 +1,24 @@
 services:
     netgen_metadata.field_type:
         class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\Type
-        parent: ezpublish.fieldType
+        parent: Ibexa\Core\FieldType\FieldType
         tags:
-            - { name: ezplatform.field_type, alias: xrowmetadata }
+            - { name: ibexa.field_type, alias: xrowmetadata }
 
     netgen_metadata.field_type.indexable:
-        class: eZ\Publish\Core\FieldType\Unindexed
+        class: Ibexa\Core\FieldType\Unindexed
         tags:
-            - { name: ezplatform.field_type.indexable, alias: xrowmetadata }
+            - { name: ibexa.field_type.indexable, alias: xrowmetadata }
 
     netgen_metadata.field_type.form_mapper:
         class: Netgen\Bundle\MetadataBundle\Core\FieldType\Metadata\FormMapper
         tags:
-            - { name: ezplatform.field_type.form_mapper.value, fieldType: xrowmetadata }
+            - { name: ibexa.admin_ui.field_type.form.mapper.value, fieldType: xrowmetadata }
 
     netgen_metadata.field_type.legacy.converter:
         class: Netgen\Bundle\MetadataBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\MetadataConverter
         tags:
-            - { name: ezplatform.field_type.legacy_storage.converter, alias: xrowmetadata }
+            - { name: ibexa.field_type.storage.legacy.converter, alias: xrowmetadata }
 
     netgen_metadata.form.metadata_field:
         class: Netgen\Bundle\MetadataBundle\Form\Type\FieldType\MetadataFieldType
